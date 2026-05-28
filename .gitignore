@@ -1,4 +1,5 @@
 .databricks/
+.tools/
 .env
 .env.*
 !.env.example

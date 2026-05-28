@@ -20,7 +20,10 @@ Use a Databricks free trial if the POC is for office/business evaluation, needs 
 ```text
 docs/
   sandbox-options.md      Databricks account options and cost controls
+  local-setup.md          Local CLI and authentication setup
   poc-plan.md             Phased POC plan
+scripts/
+  dbx.ps1                 Wrapper for the repo-local Databricks CLI
 src/
   README.md               Placeholder for POC source code
 data/
@@ -34,3 +37,5 @@ data/
 3. Install the Databricks AI Dev Kit skills into this project.
 4. Build the first small Databricks Asset Bundle POC.
 5. Commit each experiment so the decision trail is preserved.
+
+See `docs/local-setup.md` for Databricks CLI authentication steps.
