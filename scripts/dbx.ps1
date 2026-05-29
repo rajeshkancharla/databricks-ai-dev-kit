@@ -1,8 +1,3 @@
-param(
-    [Parameter(ValueFromRemainingArguments = $true)]
-    [string[]] $Arguments
-)
-
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $cli = Join-Path $repoRoot ".tools\databricks-cli\databricks.exe"
 
@@ -11,5 +6,5 @@ if (-not (Test-Path $cli)) {
     exit 1
 }
 
-& $cli @Arguments
+& $cli @args
 exit $LASTEXITCODE

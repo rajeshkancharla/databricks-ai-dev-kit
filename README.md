@@ -22,6 +22,7 @@ docs/
   sandbox-options.md      Databricks account options and cost controls
   local-setup.md          Local CLI and authentication setup
   poc-plan.md             Phased POC plan
+  data-engineering-poc-design.md Data engineering POC design
  .agents/
   skills/                 Databricks AI Dev Kit skills for Codex
  .github/

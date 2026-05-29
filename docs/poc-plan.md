@@ -39,9 +39,10 @@ Tasks:
 
 - Create the Databricks sandbox.
 - Authenticate the Databricks CLI.
-- Upload a small synthetic dataset.
-- Create Unity Catalog objects if supported by the sandbox.
-- Run a notebook or SQL transformation.
+- Create or confirm Unity Catalog catalogs: `staging`, `ids`, and `cds`.
+- Upload or generate a small synthetic retail dataset.
+- Create staging, IDS, and CDS tables.
+- Run notebook-based transformations as Databricks Jobs.
 - Capture setup commands and any limitations.
 
 Deliverable:
