@@ -24,6 +24,7 @@ docs/
   poc-plan.md             Phased POC plan
   data-engineering-poc-design.md Data engineering POC design
   poc-runbook.md          Commands to validate, deploy, and run the POC
+  ai-dev-kit-usage-map.md Skill-to-activity mapping and commands used
  .agents/
   skills/                 Databricks AI Dev Kit skills for Codex
  .github/
