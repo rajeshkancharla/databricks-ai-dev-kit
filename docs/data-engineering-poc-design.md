@@ -8,15 +8,15 @@ The POC focuses on medallion-style data engineering, not ML or data science. It 
 
 ## Layer Naming
 
-The POC uses simplified layer names:
+Use lower case for all Unity Catalog catalogs, schemas, and tables.
 
 | Medallion Concept | POC Name | Unity Catalog Catalog |
 | --- | --- | --- |
 | Bronze | staging | `staging` |
-| Silver | IDS | `ids` |
-| Gold | CDS | `cds` |
+| Silver | ids | `ids` |
+| Gold | cds | `cds` |
 
-Databricks may display manually created catalog names in lowercase. The POC will use lowercase physical catalog names while preserving the logical layer names STAGING, IDS, and CDS in documentation.
+The POC uses `staging`, `ids`, and `cds` consistently in code, SQL, bundle variables, schemas, and table names.
 
 ## Unity Catalog Namespace
 
@@ -130,7 +130,7 @@ Where possible, dimension and fact tasks can be split into parallel tasks after 
 - Databricks Jobs / Lakeflow Jobs with task dependencies.
 - Notebook tasks with parameters.
 - Synthetic data generation.
-- Staging to IDS to CDS transformations.
+- Staging to ids to cds transformations.
 - Basic data quality checks.
 - Optional system table queries for job/query observability.
 
@@ -181,8 +181,8 @@ If Free Edition does not allow catalog creation through the CLI/API, create the 
 3. Create notebooks.
 4. Generate small but realistic synthetic data.
 5. Load staging tables.
-6. Build IDS dimensions and facts.
-7. Build CDS calculated summaries.
+6. Build ids dimensions and facts.
+7. Build cds calculated summaries.
 8. Add data quality checks.
 9. Define Databricks Job resources.
 10. Validate, deploy, and run the bundle.

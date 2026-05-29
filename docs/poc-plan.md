@@ -41,7 +41,7 @@ Tasks:
 - Authenticate the Databricks CLI.
 - Create or confirm Unity Catalog catalogs: `staging`, `ids`, and `cds`.
 - Upload or generate a small synthetic retail dataset.
-- Create staging, IDS, and CDS tables.
+- Create staging, ids, and cds tables.
 - Run notebook-based transformations as Databricks Jobs.
 - Capture setup commands and any limitations.
 
