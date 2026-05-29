@@ -23,6 +23,7 @@ docs/
   local-setup.md          Local CLI and authentication setup
   poc-plan.md             Phased POC plan
   data-engineering-poc-design.md Data engineering POC design
+  poc-runbook.md          Commands to validate, deploy, and run the POC
  .agents/
   skills/                 Databricks AI Dev Kit skills for Codex
  .github/
@@ -31,10 +32,12 @@ docs/
   config.toml             Codex MCP configuration
  .vscode/
   mcp.json                VS Code Copilot MCP configuration
+resources/
+  jobs.yml                Databricks Job definition
 scripts/
   dbx.ps1                 Wrapper for the repo-local Databricks CLI
 src/
-  README.md               Placeholder for POC source code
+  notebooks/              Databricks notebooks for staging, ids, and cds
 data/
   README.md               Placeholder for sample or synthetic data
 ```
@@ -48,3 +51,18 @@ data/
 5. Commit each experiment so the decision trail is preserved.
 
 See `docs/local-setup.md` for Databricks CLI authentication steps.
+
+## POC Quick Start
+
+Validate the bundle:
+
+```powershell
+.\scripts\dbx.ps1 bundle validate --target dev
+```
+
+Deploy and run:
+
+```powershell
+.\scripts\dbx.ps1 bundle deploy --target dev
+.\scripts\dbx.ps1 bundle run retail_data_engineering_poc --target dev
+```

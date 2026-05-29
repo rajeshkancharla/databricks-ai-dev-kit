@@ -1,0 +1,31 @@
+bundle:
+  name: databricks-ai-dev-kit-data-engineering-poc
+
+include:
+  - resources/*.yml
+
+variables:
+  staging_catalog:
+    description: Catalog for raw and staged data.
+    default: staging
+  ids_catalog:
+    description: Catalog for integrated data store tables.
+    default: ids
+  cds_catalog:
+    description: Catalog for calculated data store tables.
+    default: cds
+  schema_name:
+    description: Domain schema used in each catalog.
+    default: retail
+
+targets:
+  dev:
+    default: true
+    mode: development
+    workspace:
+      profile: free-edition
+    variables:
+      staging_catalog: staging
+      ids_catalog: ids
+      cds_catalog: cds
+      schema_name: retail

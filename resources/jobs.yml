@@ -1,0 +1,106 @@
+resources:
+  jobs:
+    retail_data_engineering_poc:
+      name: "[${bundle.target}] retail data engineering poc"
+      max_concurrent_runs: 1
+      queue:
+        enabled: true
+      parameters:
+        - name: staging_catalog
+          default: ${var.staging_catalog}
+        - name: ids_catalog
+          default: ${var.ids_catalog}
+        - name: cds_catalog
+          default: ${var.cds_catalog}
+        - name: schema_name
+          default: ${var.schema_name}
+      tasks:
+        - task_key: setup_catalogs_and_schemas
+          notebook_task:
+            notebook_path: ../src/notebooks/00_setup_catalogs_and_schemas.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              cds_catalog: "{{job.parameters.cds_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: generate_staging_data
+          depends_on:
+            - task_key: setup_catalogs_and_schemas
+          notebook_task:
+            notebook_path: ../src/notebooks/01_generate_staging_data.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: load_staging_tables
+          depends_on:
+            - task_key: generate_staging_data
+          notebook_task:
+            notebook_path: ../src/notebooks/02_load_staging_tables.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: build_ids_dimensions
+          depends_on:
+            - task_key: load_staging_tables
+          notebook_task:
+            notebook_path: ../src/notebooks/03_build_ids_dimensions.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: build_ids_facts
+          depends_on:
+            - task_key: build_ids_dimensions
+          notebook_task:
+            notebook_path: ../src/notebooks/04_build_ids_facts.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: build_cds_sales_metrics
+          depends_on:
+            - task_key: build_ids_facts
+          notebook_task:
+            notebook_path: ../src/notebooks/05_build_cds_sales_metrics.py
+            base_parameters:
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              cds_catalog: "{{job.parameters.cds_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: build_cds_fulfilment_metrics
+          depends_on:
+            - task_key: build_ids_facts
+          notebook_task:
+            notebook_path: ../src/notebooks/06_build_cds_fulfilment_metrics.py
+            base_parameters:
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              cds_catalog: "{{job.parameters.cds_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: data_quality_checks
+          depends_on:
+            - task_key: build_cds_sales_metrics
+            - task_key: build_cds_fulfilment_metrics
+          notebook_task:
+            notebook_path: ../src/notebooks/07_data_quality_checks.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              cds_catalog: "{{job.parameters.cds_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"
+
+        - task_key: observability_queries
+          depends_on:
+            - task_key: data_quality_checks
+          notebook_task:
+            notebook_path: ../src/notebooks/08_observability_queries.py
+            base_parameters:
+              staging_catalog: "{{job.parameters.staging_catalog}}"
+              ids_catalog: "{{job.parameters.ids_catalog}}"
+              cds_catalog: "{{job.parameters.cds_catalog}}"
+              schema_name: "{{job.parameters.schema_name}}"

@@ -73,11 +73,11 @@ Generate coherent retail data with referential integrity:
 | `raw_customers` | Customer master data with region, segment, signup date | 5,000 |
 | `raw_products` | Product master data with category, supplier, cost, price | 500 |
 | `raw_stores` | Store/location data with region and fulfilment type | 100 |
-| `raw_orders` | Order headers with order date, customer, store, status | 50,000 |
-| `raw_order_items` | Order line items with product, quantity, price | 120,000 |
-| `raw_shipments` | Shipment status, promised date, delivered date | 50,000 |
-| `raw_returns` | Return/refund events with reason codes | 5,000 |
-| `raw_supplier_events` | Supplier delay events by supplier/category/date | 200 |
+| `raw_orders` | Order headers with order date, customer, store, status | 25,000 |
+| `raw_order_items` | Order line items with product, quantity, price | About 50,000 |
+| `raw_shipments` | Shipment status, promised date, delivered date | About 24,700 |
+| `raw_returns` | Return/refund events with reason codes | About 3,000 |
+| `raw_supplier_events` | Supplier delay events by supplier/category/date | 120 |
 
 Data should include skew and anomalies:
 
@@ -187,3 +187,15 @@ If Free Edition does not allow catalog creation through the CLI/API, create the 
 9. Define Databricks Job resources.
 10. Validate, deploy, and run the bundle.
 11. Commit each milestone to GitHub.
+
+## Bundle Structure
+
+```text
+databricks.yml
+resources/
+  jobs.yml
+src/
+  notebooks/
+docs/
+  poc-runbook.md
+```
