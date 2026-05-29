@@ -61,3 +61,30 @@ After authentication succeeds:
 2. Create a minimal Databricks Asset Bundle.
 3. Generate a small synthetic dataset.
 4. Run the first workspace smoke test.
+
+## AI Dev Kit Installed Configuration
+
+Databricks AI Dev Kit version `0.1.12` is installed for:
+
+- Codex: `.agents/skills`
+- GitHub Copilot: `.github/skills`
+- Codex MCP: `.codex/config.toml`
+- VS Code Copilot MCP: `.vscode/mcp.json`
+
+The installer was run with:
+
+```powershell
+$env:DEVKIT_CHANNEL='stable'
+$env:PATH = (Resolve-Path .tools\databricks-cli).Path + ';' + $env:PATH
+.\.tools\ai-dev-kit\install.ps1 --profile free-edition --tools copilot,codex --force --silent
+```
+
+For GitHub Copilot in VS Code:
+
+- Open this repository folder in VS Code.
+- Open Copilot Chat in Agent mode.
+- Use the tool icon or "Configure Tools" control to enable the `databricks` MCP server if needed.
+
+For Codex:
+
+- Open Codex from this repository folder so it can see `.agents/skills` and `.codex/config.toml`.

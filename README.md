@@ -22,6 +22,14 @@ docs/
   sandbox-options.md      Databricks account options and cost controls
   local-setup.md          Local CLI and authentication setup
   poc-plan.md             Phased POC plan
+ .agents/
+  skills/                 Databricks AI Dev Kit skills for Codex
+ .github/
+  skills/                 Databricks AI Dev Kit skills for GitHub Copilot
+ .codex/
+  config.toml             Codex MCP configuration
+ .vscode/
+  mcp.json                VS Code Copilot MCP configuration
 scripts/
   dbx.ps1                 Wrapper for the repo-local Databricks CLI
 src/
